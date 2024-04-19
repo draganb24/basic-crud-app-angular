@@ -1,0 +1,52 @@
+<div class="container mt-4" >
+  <div class="card">
+          <h1>{{ currentStudent ? 'Update student' : 'Add new student' }}</h1><br>
+    <form [formGroup]="studentForm" (ngSubmit)="saveOrUpdate()">
+      <div class="form-group">
+        <label>Name</label>
+        <input formControlName="name" class="form-control" placeholder="Insert name">
+      </div><br>
+      <div class="form-group">
+        <label>Address</label>
+        <input formControlName="address" class="form-control" placeholder="Insert address">
+      </div><br>
+      <div class="form-group">
+        <label>Phone</label>
+        <input formControlName="phone" class="form-control" placeholder="Insert phone number">
+      </div>
+      <button type="submit" class="btn btn-primary mt-4">Submit</button>
+    </form>
+  </div>
+
+  <div>
+      <div class="container mt-4" >
+          <h1>Students</h1><br>
+      <table class="table">
+          <thead>
+            @if(!isStudentsDataLoaded) {
+           <h1>Loading.................</h1>
+            }
+          <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Option</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(currentStudent of students; track currentStudent.id){
+              <tr>
+                <th scope="row">{{ currentStudent.id  }}</th>
+                <td>{{ currentStudent.name }}</td>
+                <td>{{ currentStudent.address }}</td>
+                <td>{{ currentStudent.phone }}</td>
+                <td>
+                  <button type="button" class="btn btn-success" style="margin-right: 10px;" (click)="setUpdate(currentStudent)">Edit</button>
+                  <button type="button" class="btn btn-danger" (click)="setDelete(currentStudent)">Delete</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
